@@ -13,7 +13,7 @@ resource "mongodbatlas_advanced_cluster" "cluster" {
     #num_shards = 2
     region_configs {
       electable_specs {
-        instance_size = "M10"
+        instance_size = "M30"
         node_count    = 3
       }
       provider_name = local.provider_name
@@ -38,7 +38,7 @@ resource "mongodbatlas_advanced_cluster" "cluster" {
   }
 
   # Encryption needs to be turned on for the project before it can be enabled on the cluster
-  depends_on = [mongodbatlas_encryption_at_rest.encrypt]
+  #depends_on = [mongodbatlas_encryption_at_rest.encrypt]
 }
 
 resource "mongodbatlas_database_user" "user1" {
@@ -48,7 +48,7 @@ resource "mongodbatlas_database_user" "user1" {
   auth_database_name = "admin"
 
   roles {
-    role_name     = "readWriteAnyDatabase"
+    role_name     = "atlasAdmin"
     database_name = "admin"
   }
   labels {
