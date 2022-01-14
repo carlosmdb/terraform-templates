@@ -24,8 +24,15 @@ resource "aws_instance" "mongosh" {
   # availability_zone = local.aws_az
   instance_type               = local.aws_ec2_instance
   key_name                    = var.key_name
+
+  # NOTE: if you don't include this file as part of a complete AWS deployment
+  # you might need to either create a new network to create this EC2 instance in
+  # or you can also import existing network configurations to terraform
+  # or you can just set the existing ids instead of the reference
+  
   vpc_security_group_ids      = [aws_security_group.main.id]
   subnet_id                   = aws_subnet.subnet1.id
+  
   associate_public_ip_address = true
 
   ebs_block_device {
