@@ -1,6 +1,6 @@
 output "name" {
   description = "Name of the created mongodb atlas cluster"
-  value       = var.mongodb_cluster_name
+  value       = local.cluster_name
 }
 
 output "cluster_id" {

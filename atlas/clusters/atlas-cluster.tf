@@ -17,11 +17,11 @@ resource "mongodbatlas_advanced_cluster" "cluster" {
     #num_shards = 2
     region_configs {
       electable_specs {
-        instance_size = "M30"
+        instance_size = local.atlas_size_name
         node_count    = 3
       }
       provider_name = local.provider_name
-      region_name   = local.region
+      region_name   = local.region_name
       priority      = 7
     }
 # uncomment the following line if you want to create multi-cloud clusters
@@ -54,6 +54,7 @@ resource "mongodbatlas_database_user" "user1" {
   project_id         = var.project_id
   auth_database_name = "admin"
 
+  # Define the roles you need to user to have
   roles {
     role_name     = "atlasAdmin"
     database_name = "admin"
