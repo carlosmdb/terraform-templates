@@ -1,7 +1,7 @@
 resource "google_compute_instance" "default" {
-  name         = "${var.prefix}-locust"
-  machine_type = "e2-small"
-  zone         = var.gcp_zone
+  name         = "${local.prefix}-locust"
+  machine_type = local.gcp_vm_instance
+  zone         = local.gcp_zone
 
   boot_disk {
     initialize_params {
@@ -9,6 +9,10 @@ resource "google_compute_instance" "default" {
     }
   }
 
+  # NOTE: if you don't include this file as part of a complete GCP deployment
+  # you might need to either create a new network to create this VM instance in
+  # or you can also import existing network configurations to terraform
+  # or you can just set the existing ids instead of the reference
   network_interface {
     network = google_compute_network.default.id
 
@@ -22,5 +26,7 @@ resource "google_compute_instance" "default" {
   }
 
   metadata_startup_script = local.metadata_startup_script
+
+  labels = local.tags
 
 }

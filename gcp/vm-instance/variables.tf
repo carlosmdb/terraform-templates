@@ -1,57 +1,20 @@
-variable "cloud_provider_access_name" {
-  default = "AWS"
-}
-variable "public_key" {
-
-}
-variable "private_key" {
-
-}
-variable "access_key" {
-
-}
-variable "secret_key" {
-
-}
-variable "aws_region" {
-  default = "us-east-1"
-}
-
-variable "mongodb_project_name" {
-
-}
-variable "enable_kms_key_rotation" {
-  default = "true"
-}
-variable "mongodb_cluster_name" {
-  default = "atlas"
-}
-
-variable "admin_password" {
-  description = "Password for default users"
-  type        = string
-}
-variable "key_name" {
-  description = "Key pair name"
-  type        = string
-}
-
-variable "private_key_path" {
-  description = "Access path to private key"
-  type        = string
-}
-
-variable "provisioning_address_cdr" {
-  description = "SSH firewall source address, home/office !?"
-  type        = string
-}
-
 variable "user_email" {
-  description = "Email address to add as tag"
-  type        = string
-  default     = "somebody@example.com"
+  description = "Your user email for tagging the resources"
+  type = string
 }
-variable "project_id" {
-  description = "Atlas Existin Project ID Key"
-  type        = string
+
+variable "gcp_ssh_user" {
+  description = "The GCP ssh user - usually this is your <firstName><lastName>"
+  type = string
 }
+
+variable "gcp_ssh_pub_key_file" {
+  description = "The GCP public key file location in your machine"
+  type = string
+}
+
+variable "gcp_project_id" {
+  description = "The GCP project ID to host your resources"
+  type = string
+}
+

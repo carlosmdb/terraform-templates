@@ -1,9 +1,4 @@
 output "Virtual_Machine_Address" {
   description = "Virtual Machine Address"
-  value       = aws_instance.mongosh.public_ip
-}
-
-
-output "private_key_path" {
-  value = var.private_key_path
+  value       = google_compute_instance.default.network_interface.0.access_config.0.nat_ip
 }
