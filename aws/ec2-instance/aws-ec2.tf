@@ -19,7 +19,7 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
-resource "aws_instance" "mongosh" {
+resource "aws_instance" "instance" {
   ami = data.aws_ami.ubuntu.id
   # availability_zone = local.aws_az
   instance_type               = local.aws_ec2_instance
@@ -44,7 +44,7 @@ resource "aws_instance" "mongosh" {
   user_data_base64 = base64encode(local.user_data)
 
   connection {
-    host        = aws_instance.mongosh.public_ip
+    host        = aws_instance.instance.public_ip
     user        = "ubuntu"
     password    = var.admin_password
     agent       = true
