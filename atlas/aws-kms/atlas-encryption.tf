@@ -11,7 +11,7 @@ resource "mongodbatlas_encryption_at_rest" "encrypt" {
   aws_kms_config  {
     enabled                = true
     customer_master_key_id = aws_kms_key.encrypt.key_id
-    region                 = upper(var.aws_region)
+    region                 = upper(local.aws_region)
     role_id                = mongodbatlas_cloud_provider_access_setup.setup_only.role_id
   }
 

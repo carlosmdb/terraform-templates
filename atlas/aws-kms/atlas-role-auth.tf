@@ -1,6 +1,6 @@
 resource "mongodbatlas_cloud_provider_access_setup" "setup_only" {
   project_id    = var.project_id
-  provider_name = var.cloud_provider_access_name
+  provider_name = local.provider_name
 }
 
 resource "mongodbatlas_cloud_provider_access_authorization" "auth_role" {
