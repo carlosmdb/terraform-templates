@@ -1,21 +1,21 @@
 # Create a Google Network
 resource "google_compute_network" "default" {
   project = var.gcp_project_id
-  name    = "${var.prefix}-network"
+  name    = "${local.prefix}-network"
 }
 
 # Create a Google Sub Network
 resource "google_compute_subnetwork" "default" {
   project       = google_compute_network.default.project
-  name          = "${var.prefix}-subnet"
+  name          = "${local.prefix}-subnet"
   ip_cidr_range = "10.0.0.0/16"
-  region        = var.gcp_region
+  region        = local.gcp_region
   network       = google_compute_network.default.id
 }
 
 # Open firewall to local ip address
 resource "google_compute_firewall" "default" {
-  name    = "${var.prefix}-firewall"
+  name    = "${local.prefix}-firewall"
   network = google_compute_network.default.name
 
   allow {
@@ -34,11 +34,11 @@ resource "google_compute_firewall" "default" {
 resource "google_compute_address" "default" {
   count        = 50
   project      = google_compute_subnetwork.default.project
-  name         = "${var.prefix}-${count.index}"
+  name         = "${local.prefix}-${count.index}"
   subnetwork   = google_compute_subnetwork.default.id
   address_type = "INTERNAL"
   address      = "10.0.42.${count.index}"
-  region       = var.gcp_region
+  region       = local.gcp_region
 
   depends_on = [mongodbatlas_privatelink_endpoint.test]
 }
@@ -47,8 +47,8 @@ resource "google_compute_address" "default" {
 resource "google_compute_forwarding_rule" "default" {
   count                 = 50
   project               = var.gcp_project_id
-  region                = var.gcp_region
-  name                  = "${var.prefix}-${count.index}"
+  region                = local.gcp_region
+  name                  = "${local.prefix}-${count.index}"
   target                = mongodbatlas_privatelink_endpoint.test.service_attachment_names[count.index]
   ip_address            = google_compute_address.default[count.index].id
   network               = google_compute_network.default.id
