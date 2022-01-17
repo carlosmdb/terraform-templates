@@ -42,3 +42,5 @@ Simple GCP VM instance preinstalled with mongodb and python
 ## Tips and Tricks
 
 You can import existing resources into your terraform state - see instructions [here](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc#import) for an example of importing an existing AWS VPC network
+
+> **_NOTE:_** Make sure you are logged in in GCP using _gcloud_ or AWS with valid access keys
