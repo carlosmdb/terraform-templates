@@ -1,4 +1,4 @@
-# Terraform templates
+# MongoDB Terraform templates
 
 Several terraform templates for AWS, GCP and MongoDB Atlas resources
 
