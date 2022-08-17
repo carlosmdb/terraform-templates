@@ -52,7 +52,7 @@ resource "aws_security_group" "main" {
   vpc_id = aws_vpc.vpc.id
   egress {
     from_port   = 1024
-    to_port     = 65536
+    to_port     = 65535
     protocol    = "tcp"
     cidr_blocks = [local.aws_subnet1_cidr_block]
   }
